@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Nav from "./components/Nav";
 import AllUsers from "./components/AllUsers";
 import Header from "./components/Header";
+import ProtectedRoute from "@/components/components/ProtectedRoute";
 
 export const metadata: Metadata = {
   title: "Task Management",
@@ -14,7 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <section className="flex">
+    <ProtectedRoute>
+      <section className="flex">
         <Nav />
         <div className="flex-1">
             <Header />
@@ -22,5 +24,6 @@ export default function RootLayout({
         </div>
         <AllUsers />
     </section>
+    </ProtectedRoute>
   );
 }

@@ -1,14 +1,12 @@
 'use client';
 import Loader from '@/components/components/Loader';
-// import { useContextHook } from '@/utils/useContext';
-// import Loader from '@/components/Loader';
 import { app } from '@/config/firebaseConfig';
 import { AuthContextType } from '@/types/types';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
-import { createContext, useEffect, useState } from 'react'
+import { Context, createContext, useContext, useEffect, useState } from 'react'
 
 
-const Context = createContext<AuthContextType | null >(null)
+const Contextt = createContext<AuthContextType | null >(null)
 
 const AuthContext = ({
     children,
@@ -38,13 +36,20 @@ const AuthContext = ({
 
     if(id === '') return <Loader />
   return (
-    <Context.Provider value={{id, setId, user}}>
+    <Contextt.Provider value={{id, setId, user}}>
         {children}
-    </Context.Provider>
+    </Contextt.Provider>
   )
 }
 
 export default AuthContext;
 
+export const useAuthContextProvider = () =>{
+  const context = useContext(Contextt);
+  if(context === null ) {
+      throw new Error('using context hook outside it container');
+  };
+  // console.log(context)
+  return context;
+} 
 
-export const useAuthContextProvider : ()=>AuthContextType  = () => useContextHook(Context)

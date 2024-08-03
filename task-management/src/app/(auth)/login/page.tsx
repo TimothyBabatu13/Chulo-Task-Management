@@ -3,9 +3,12 @@ import Link from "next/link"
 import InputWithLabel from "../components/InputWithLabel"
 import { FormEvent, useState } from "react"
 import { useToast } from "@/components/ui/use-toast"
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import { app } from "@/config/firebaseConfig"
 
 const Page = () => {
     const loading = false
+    const auth = getAuth(app)
     const { toast } = useToast();
     const [value, setValue] = useState({
         password: '',
@@ -28,6 +31,22 @@ const Page = () => {
             })
             return;
         }
+
+        signInWithEmailAndPassword(auth, value.email, value.password)
+        .then(user => {
+          console.log(user)
+          toast({
+            description: 'Login successful',
+            variant: 'default'
+          })
+        })
+        .catch(err =>{
+          console.log(err)
+          toast({
+            description: err?.code,
+            variant: 'destructive'
+          })
+        })
     }
   return (
     <div className="border shadow-md flex min-h-full flex-1 flex-col justify-center px-6 py-5 mt-5 lg:px-8 sm:mx-auto sm:w-full sm:max-w-sm">

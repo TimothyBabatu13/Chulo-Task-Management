@@ -13,7 +13,7 @@ const ProtectedRoute = ({
   }>)=> {
     const route = useRouter();
     const { id } = useAuthContextProvider();
-
+    // console.log(id)
     useEffect(() => {
       if(id === null) route.push('/signup')
     } , [id, route])
