@@ -3,7 +3,7 @@ import UsersInfo from "./UsersInfo"
 
 const Nav = () => {
   return (
-    <nav className=" bg-red-500 w-[30%]">
+    <nav className=" bg-[#8d69f1] min-h-[100vh] border-b border-b-[white] w-[300px] min-w-[300px]">
         <UsersInfo />
         <NavLinks />
     </nav>

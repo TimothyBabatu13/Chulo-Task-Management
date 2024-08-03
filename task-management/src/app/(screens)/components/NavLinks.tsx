@@ -1,7 +1,9 @@
+'use client'
 import { cn } from "@/lib/utils"
 import { LayoutDashboard, PlusIcon } from "lucide-react"
 import Link from "next/link"
-import { LinkHTMLAttributes } from "react"
+import { usePathname } from "next/navigation"
+import { LinkHTMLAttributes, useEffect, useState } from "react"
 
 const LinkWithIcon = ({ classMame, children, href } : {
     classMame?: string,
@@ -10,20 +12,26 @@ const LinkWithIcon = ({ classMame, children, href } : {
 }) => {
     
     return (
-        <Link href={href} className={cn(`flex items-center ${classMame}`)}>{children}</Link>
+        <Link href={href} className={cn(`flex p-2.5 rounded-l-[20px] items-center ${classMame}`)}>{children}</Link>
     )
 }
 
 const NavLinks = () => {
+    const [activeLink, setActiveLink] = useState('');
+    const pathName = usePathname()
+
+    useEffect(()=>{
+        setActiveLink(pathName);
+    }, [pathName])
   return (
-    <div>
-        <LinkWithIcon href='/'>
+    <div className="mt-20 ml-5">
+        <LinkWithIcon classMame={`${activeLink === '/' ? "bg-[#f4f4f4] text-[#555]" : "text-[#fff]"}`} href='/'>
             <LayoutDashboard />
-            <span className="ml-2.5">Dashboard</span>
+            <span className="ml-2.5 text-[#555] text-[17.65px]">Dashboard</span>
         </LinkWithIcon>
-        <LinkWithIcon href='/new-project'>
+        <LinkWithIcon classMame={`mt-2.5 ${!(activeLink === '/') ? "bg-[#f4f4f4] text-[#555]": "text-[#fff]"} `} href='/new-project'>
             <PlusIcon />
-            <span className="ml-2.5">New Project</span>
+            <span className={`ml-2.5`}>New Project</span>
         </LinkWithIcon>
     </div>
   )

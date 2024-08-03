@@ -6,9 +6,9 @@ const IndividualUser = ({ src, name, isActive } : {
     isActive: boolean
 }) => {
   return (
-    <div className="mb-3 flex items-center justify-center">
-        {isActive && <div className="h-2.5 w-2.5 bg-green-600 rounded-full"/>}
-        <h2 className="mx-2">{name}</h2>
+    <div className="mt-5 flex items-center justify-center">
+        {isActive && <div className="h-3 w-3 bg-[#0ebb50] rounded-full"/>}
+        <h2 className="mx-2.5">{name}</h2>
         <Image 
             height={50}
             width={50}

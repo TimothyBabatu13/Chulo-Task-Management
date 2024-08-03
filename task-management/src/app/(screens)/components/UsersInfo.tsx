@@ -9,17 +9,16 @@ const UsersInfo = () => {
   const img = user?.photoURL;
   const displayName = user?.displayName;
 
-  console.log(img, displayName)
   return (
-    <div className="flex flex-col items-center justify-center py-10">
+    <div className="flex flex-col items-center justify-center py-10 px-[30px] text-center">
         <Image 
             src={img || ''}
-            height={100}
-            width={100}
+            height={70}
+            width={70}
             alt="user"
-            className="rounded-[50px] block"
+            className="rounded-[50px] block mb-2.5"
         />
-        <h1>Hey, {displayName}</h1>
+        <h1 className="text-[#fff] text-[17.6px] font-bold">Hey, {displayName}</h1>
     </div>
   )
 }

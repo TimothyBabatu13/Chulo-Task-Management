@@ -16,9 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <ProtectedRoute>
-      <section className="flex">
+      <section className="flex h-[100vw]">
         <Nav />
-        <div className="flex-1">
+        <div className="flex-1 bg-[#f4f4f4] px-[60px]">
             <Header />
             {children}  
         </div>
