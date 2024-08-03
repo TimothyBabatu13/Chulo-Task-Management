@@ -17,7 +17,7 @@ const AssignedProjectCard = ({ name, deadline, assignedTo} : {
        <div className="flex py-5">
         {
                 assignedTo.map((person, id) => (
-                    <Image width={50} height={50} className="rounded-full" src={person.img} alt={person.name}/>
+                    <Image key={id} width={50} height={50} className="rounded-full" src={person.img} alt={person.name}/>
                 ))
             }
        </div>

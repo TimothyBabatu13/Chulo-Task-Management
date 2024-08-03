@@ -15,7 +15,7 @@ interface valueProps {
   img: any
 }
 
-const page = () => {
+const Page = () => {
   
     const { toast } = useToast();
     const auth = getAuth(app);
@@ -204,4 +204,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

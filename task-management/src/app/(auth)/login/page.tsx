@@ -4,7 +4,7 @@ import InputWithLabel from "../components/InputWithLabel"
 import { FormEvent, useState } from "react"
 import { useToast } from "@/components/ui/use-toast"
 
-const page = () => {
+const Page = () => {
     const loading = false
     const { toast } = useToast();
     const [value, setValue] = useState({
@@ -89,4 +89,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
