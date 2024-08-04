@@ -12,6 +12,7 @@
 
 // console.log(formattedDate); 
 export const formatDate = (timestamp: any) => {
+    if(timestamp == undefined) return '';
     const date = new Date(timestamp.seconds * 1000);
     const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' } as Intl.DateTimeFormatOptions;
     const formattedDate = date.toLocaleDateString('en-US', options);
