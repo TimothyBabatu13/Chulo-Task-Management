@@ -14,7 +14,8 @@ const Page = ({ params } : {
 }) => {
 
     const [data, setData] = useState<any>(null)
-    console.log(data)
+    // console.log(data.dueDate)
+    // console.log(formatDate(data.dueDate))
     useEffect(()=>{
         const get = async () => {
             const docRef = doc(db, "projects", params.id);
