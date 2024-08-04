@@ -16,7 +16,7 @@ const UsersInfo = () => {
             height={70}
             width={70}
             alt="user"
-            className="rounded-[50px] block mb-2.5"
+            className="rounded-[50px] w-[70px] h-[70px] block mb-2.5"
         />
         <h1 className="text-[#fff] text-[17.6px] font-bold">Hey, {displayName}</h1>
     </div>

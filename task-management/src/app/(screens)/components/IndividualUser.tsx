@@ -14,7 +14,7 @@ const IndividualUser = ({ src, name, isActive } : {
             width={50}
             src={src}
             alt={`${name} image`}
-            className="rounded-full"
+            className="rounded-full w-[50px] h-[50px]"
         />
     </div>
   )

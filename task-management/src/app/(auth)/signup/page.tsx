@@ -7,6 +7,7 @@ import { createUserWithEmailAndPassword, getAuth, updateProfile } from "firebase
 import { app, db } from "@/config/firebaseConfig"
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage"
 import { addDoc, collection } from "firebase/firestore"
+import { useRouter } from "next/navigation"
 
 interface valueProps {
   password: string,
@@ -20,6 +21,7 @@ const Page = () => {
     const { toast } = useToast();
     const auth = getAuth(app);
     const storage = getStorage(app);
+    const navigate = useRouter()
 
     const [value, setValue] = useState<valueProps>({
         password: '',
@@ -103,6 +105,7 @@ const Page = () => {
                             description: 'Account created successfully.',
                             variant: 'default',
                           })
+                          navigate.push('/login');
                         }
                       
                       }

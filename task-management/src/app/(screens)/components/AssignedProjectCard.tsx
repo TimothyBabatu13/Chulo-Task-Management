@@ -26,7 +26,7 @@ const AssignedProjectCard = ({ name, deadline, assignedTo, id} : {
        <div className="mt-5 border-t border-t-[#eee] flex pt-5">
         {
                 assignedTo.map((person, id) => (
-                    <Image key={id} width={30} height={30} className="rounded-full mr-2.5" src={person.photoURL} alt={person.displayName}/>
+                    <Image key={id} width={30} height={30} className="rounded-full mr-2.5 w-[30px] h-[30px]" src={person.photoURL} alt={person.displayName}/>
                 ))
             }
        </div>

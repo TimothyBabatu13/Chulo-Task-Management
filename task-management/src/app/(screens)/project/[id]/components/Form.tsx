@@ -15,7 +15,7 @@ const Form = ({ id } : {
     const handleChange = (e: any) => {
       setComment(e.target.value)
     }
-
+    
     const handleSubmit = async (e: FormEvent) => {
       e.preventDefault()
       const docRef = await addDoc(collection(db, 'comments'), {
@@ -23,12 +23,15 @@ const Form = ({ id } : {
         comment,
         posterName: user.user?.displayName,
         timestamp: serverTimestamp(),
+        posterImage: user.user?.photoURL
       });
       if(docRef.id){
         toast({
           description: 'Comment added successfully',
           variant: 'default',
         })
+        setComment('')
+        console.log('added successfully')
       }
     }
 
