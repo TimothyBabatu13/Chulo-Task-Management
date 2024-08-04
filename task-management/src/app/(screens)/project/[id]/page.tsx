@@ -40,8 +40,8 @@ const Page = ({ params } : {
        {/* </div> */}
        <h5>Project is assigned to:</h5>
        <h6>
-        {data?.assignedTo.map((item: any) =>(
-            <Image src={item.photoURL} height={50} width={50} alt=""/>
+        {data?.assignedTo.map((item: any, id: number) =>(
+            <Image key={id} src={item.photoURL} height={50} width={50} alt=""/>
         ))}
        </h6>
     </div>
