@@ -19,7 +19,8 @@ const Page = () => {
   
     const { toast } = useToast();
     const auth = getAuth(app);
-  
+    const storage = getStorage(app);
+
     const [value, setValue] = useState<valueProps>({
         password: '',
         email: '',
@@ -56,12 +57,13 @@ const Page = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           const UploadFile = (URL: any) => {
-  
-            const storage = getStorage();
-            const storageRef = ref(storage, URL);
+
+            // console.log(URL)
+            const storageRef = ref(storage, URL?.name);
+            // console.log(storageRef)
             
-            const uploadTask = uploadBytesResumable(storageRef, URL?.name);
-            
+            const uploadTask = uploadBytesResumable(storageRef, URL);
+            // console.log(uploadTask)
             uploadTask.on('state_changed', 
               (snapshot) => {
             
@@ -77,7 +79,7 @@ const Page = () => {
                 }
               }, 
               (error) => {
-                
+                console.log(error)
               }, 
               () => {
                 getDownloadURL(uploadTask.snapshot.ref)
@@ -116,9 +118,10 @@ const Page = () => {
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
+          console.log(errorMessage)
           setLoading(false)
           toast({
-            description: 'Please, sign up again',
+            description: errorMessage,
             variant: 'destructive'
           })
         });

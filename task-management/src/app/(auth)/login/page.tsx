@@ -5,10 +5,14 @@ import { FormEvent, useState } from "react"
 import { useToast } from "@/components/ui/use-toast"
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import { app } from "@/config/firebaseConfig"
+import { collection, doc, getFirestore, onSnapshot, query, updateDoc, where } from "firebase/firestore"
+import { useRouter } from "next/navigation"
 
 const Page = () => {
     const loading = false
     const auth = getAuth(app)
+    const db = getFirestore(app)
+    const navigate = useRouter()
     const { toast } = useToast();
     const [value, setValue] = useState({
         password: '',
@@ -34,12 +38,38 @@ const Page = () => {
 
         signInWithEmailAndPassword(auth, value.email, value.password)
         .then(user => {
-          console.log(user)
+          // console.log(user)
           toast({
             description: 'Login successful',
             variant: 'default'
           })
-        })
+          const updateDocument = async () => {
+            const users = query(collection(db, 'users'), where("uid", '==', user.user.uid)) 
+            let isUnsubscribed = false;
+            
+            // const q = query(collection(db, "your-collection"), orderBy("timestamp"));
+            const unsub = onSnapshot(users, async (result)=>{
+                if (isUnsubscribed) return;
+                const data = result.docs.map(item => item.id)[0];
+                console.log(data)
+                const docRef = doc(db, 'users', data);
+                await updateDoc(docRef, {
+                  active: true
+                }).then(res => {
+                  console.log('status changed');
+                  navigate.push('/');
+                }).catch(err => console.log(err))
+            })
+           
+            return () => {
+                isUnsubscribed = true;
+                // unsubscrib();
+            }
+           
+          }
+          updateDocument()
+  //call the function here
+    })
         .catch(err =>{
           console.log(err)
           toast({
