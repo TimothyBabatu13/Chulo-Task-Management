@@ -31,6 +31,7 @@ const AllUsers = () => {
         {
           data?.map((person, id) => (
             <IndividualUser 
+              key={id}
               name={person?.displayName}
               isActive={person?.active}
               src={person?.photoURL}
