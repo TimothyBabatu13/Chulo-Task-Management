@@ -33,13 +33,13 @@ const Page = ({ params } : {
   return (
     <div>
         <div style={{boxShadow: '3px 3px 5px rgba(0, 0, 0, .05)'}} className=" cursor-pointer p-4 bg-[#fff] rounded-[6px] border m-2">
-        <h1 className="text-[#444] text-[15.84px] font-bold">{data?.title}</h1>
-        <h2>By: {data?.assignedBy.displayName}</h2>
-        <h3 className="text-[#999] text-[15.84px]">Project due by {formatDate(data?.dueDate)}</h3>
+        <h1 className="text-[#444] text-[17.65px] font-bold">{data?.title}</h1>
+        <h2 className="text-[17.6px]">By: {data?.assignedBy.displayName}</h2>
+        <h3 className="my-2.5 text-[15.84px]">Project due by {formatDate(data?.dueDate)}</h3>
        {/* <div className="mt-5 border-t border-t-[#eee] flex pt-5"> */}
-        <h5>{data?.description}</h5>
+        <h5 className="my-[30px] text-[15.84px] text-[#999]">{data?.description}</h5>
        {/* </div> */}
-       <h5>Project is assigned to:</h5>
+       <h5 className="text-[15.84px] font-bold text-[#999]">Project is assigned to:</h5>
        <h6>
         {data?.assignedTo.map((item: any, id: number) =>(
             <Image key={id} src={item.photoURL} height={50} width={50} alt=""/>
