@@ -19,7 +19,18 @@ interface DataFromFirebase {
     photoURL: string,
     uid: string,
 }
-
+interface arr1Type {
+    displayName: string,
+    email: string,
+    photoURL: string
+    active: boolean,
+    uid: string,
+    id: string
+}
+interface arr2Type{
+    label: string,
+    value: string
+}
 interface detailsType {
     projectName: string,
     projectDetails: string,
@@ -57,8 +68,8 @@ const Form = () => {
             photoURL: userr.user?.photoURL,
             uid: userr.user?.uid
         }
-        const result = NeededPeople().filter(item => item != undefined);
-        
+        const result = findCommonElements(data, selected);
+    
         if(!result.length || !details.projectName || !details.projectDueDate || !details.projectCategory ){
             toast({
                 description: 'Please fill in all the boxes',
@@ -99,12 +110,24 @@ const Form = () => {
         if (isUnsubscribed) return;
 
         const dataa = result.docs.map(item => ({...item.data(), id: item.id}));
+        console.log(dataa)
         setData(dataa)
     })
     return () => {
         isUnsubscribed = true;
     }
   } ,[])
+
+  function findCommonElements(arr1 : arr1Type[], arr2: arr2Type[]) {
+    
+    const uidsSet = new Set(arr2.map((item) => item.value));
+  
+    // Find the common elements based on the uid
+    const commonElements = arr1.filter((item) => uidsSet.has(item.uid));
+  
+    return commonElements;
+  }
+  
 
 
   const NeededPeople = ()=> {
@@ -117,7 +140,7 @@ const Form = () => {
   })
 }
 
-  console.log(data)
+//   console.log(data)
   const options = data?.map((datum) => ({
     label: datum.displayName,
     value: datum.uid,
