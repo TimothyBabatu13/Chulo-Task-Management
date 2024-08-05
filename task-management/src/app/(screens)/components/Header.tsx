@@ -37,7 +37,7 @@ const Header = () => {
                 description: 'You have successfully signed out',
                 variant: 'default'
               })
-              navigate.push('/login')
+              // navigate.push('/login')
             })
           }).catch(err => console.log(err))
       })
