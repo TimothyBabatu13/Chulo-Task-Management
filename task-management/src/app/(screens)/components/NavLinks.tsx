@@ -25,11 +25,11 @@ const NavLinks = () => {
     }, [pathName])
   return (
     <div className="mt-20 ml-5">
-        <LinkWithIcon classMame={`${activeLink === '/' ? "bg-[#f4f4f4] text-[#555]" : "text-[#fff]"}`} href='/'>
+        <LinkWithIcon classMame={`${activeLink !== '/new-project' ? "bg-[#f4f4f4] text-[#555]" : "text-[#fff]"}`} href='/'>
             <LayoutDashboard />
             <span className="ml-2.5 text-[#555] text-[17.65px]">Dashboard</span>
         </LinkWithIcon>
-        <LinkWithIcon classMame={`mt-2.5 ${!(activeLink === '/') ? "bg-[#f4f4f4] text-[#555]": "text-[#fff]"} `} href='/new-project'>
+        <LinkWithIcon classMame={`mt-2.5 ${(activeLink === '/new-project') ? "bg-[#f4f4f4] text-[#555]": "text-[#fff]"} `} href='/new-project'>
             <PlusIcon />
             <span className={`ml-2.5`}>New Project</span>
         </LinkWithIcon>

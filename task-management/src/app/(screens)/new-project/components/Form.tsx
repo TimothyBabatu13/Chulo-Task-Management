@@ -160,6 +160,7 @@ const Form = () => {
                 onChange={handleChange}
                 value={details.projectName}
                 name="projectName"
+                // className="w-[full]"
             />
         </div>
         <div className="my-6">
