@@ -7,7 +7,7 @@ const IndividualUser = ({ src, name, isActive } : {
 }) => {
   return (
     <div className="mt-5 flex items-center justify-center">
-        {isActive && <div className="min-h-3 min-w-3 bg-[#0ebb50] rounded-full"/>}
+        <div className={`min-h-3 min-w-3 ${isActive ? "bg-[#0ebb50]" : "bg-gray-500"} rounded-full`}/>
         <h2 className="mx-2.5">{name}</h2>
         <Image 
             height={50}
