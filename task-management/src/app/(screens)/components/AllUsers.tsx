@@ -27,7 +27,7 @@ const AllUsers = () => {
   return (
     <div className=" bg-[#fbfbfb] p-[30px]">
         <h1 className="text-[21.12px] font-bold text-[#444] mb-10">All Users</h1>
-       <div>
+       <div className="">
         {
           data?.map((person, id) => (
             <IndividualUser 
