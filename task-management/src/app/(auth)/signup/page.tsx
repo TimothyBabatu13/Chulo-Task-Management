@@ -8,6 +8,7 @@ import { app, db } from "@/config/firebaseConfig"
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage"
 import { addDoc, collection } from "firebase/firestore"
 import { useRouter } from "next/navigation"
+import { Loader2 } from "lucide-react"
 
 interface valueProps {
   password: string,
@@ -191,10 +192,11 @@ const Page = () => {
                 <div>
                   <button
                     type="submit"
-                    disabled={false}
-                    className={`flex w-full justify-center rounded-md  ${loading ? 'bg-indigo-500' : 'bg-indigo-600'} px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+                    disabled={loading}
+                    className={`flex items-center w-full justify-center rounded-md  ${loading ? 'bg-indigo-500' : 'bg-indigo-600'} px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
                   >
-                    Sign up
+                    {loading && <Loader2 className="h-4 w-4 animate-spin mr-4"/>}
+                    <span>{loading ? 'Please wait...' : 'Sign up'}</span>
                   </button>
                 </div>
               </form>

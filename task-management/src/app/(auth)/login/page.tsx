@@ -7,9 +7,10 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 import { app } from "@/config/firebaseConfig"
 import { collection, doc, getFirestore, onSnapshot, query, updateDoc, where } from "firebase/firestore"
 import { useRouter } from "next/navigation"
+import { Loader2 } from "lucide-react"
 
 const Page = () => {
-    const loading = false
+    const [loading, setIsLoading] = useState(false)
     const auth = getAuth(app)
     const db = getFirestore(app)
     const navigate = useRouter()
@@ -36,9 +37,11 @@ const Page = () => {
             return;
         }
 
+        setIsLoading(true);
         signInWithEmailAndPassword(auth, value.email, value.password)
         .then(user => {
           // console.log(user)
+          setIsLoading(false)
           toast({
             description: 'Login successful',
             variant: 'default'
@@ -72,6 +75,7 @@ const Page = () => {
     })
         .catch(err =>{
           console.log(err)
+          setIsLoading(false)
           toast({
             description: err?.code,
             variant: 'destructive'
@@ -119,10 +123,11 @@ const Page = () => {
                 <div>
                   <button
                     type="submit"
-                    disabled={false}
-                    className={`flex w-full justify-center rounded-md  ${loading ? 'bg-indigo-500' : 'bg-indigo-600'} px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
+                    disabled={loading}
+                    className={`flex items-center w-full justify-center rounded-md  ${loading ? 'bg-indigo-500' : 'bg-indigo-600'} px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`}
                   >
-                    Sign in
+                    {loading && <Loader2 className='h-4 w-4 animate-spin mr-2'/>}
+                    {loading ? "Please wait.." : 'Sign in'}
                   </button>
                 </div>
               </form>
