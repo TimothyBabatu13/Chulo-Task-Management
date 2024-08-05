@@ -18,6 +18,13 @@ const Form = ({ id } : {
     
     const handleSubmit = async (e: FormEvent) => {
       e.preventDefault()
+      if(!comment){
+        toast({
+          description: "Input is empty",
+          variant: "destructive"
+        })
+        return;
+      }
       const docRef = await addDoc(collection(db, 'comments'), {
         postId: id,
         comment,
