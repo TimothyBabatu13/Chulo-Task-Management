@@ -29,12 +29,13 @@ const AllUsers = () => {
         <h1 className="text-[21.12px] font-bold text-[#444] mb-10">All Users</h1>
        <div className="">
         {
-          data?.map((person, id) => (
+          data?.map((person) => (
             <IndividualUser 
-              key={id}
+              key={person?.id}
               name={person?.displayName}
               isActive={person?.active}
               src={person?.photoURL}
+              id={person?.uid}
             />
           ))
         }
