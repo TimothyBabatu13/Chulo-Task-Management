@@ -1,8 +1,10 @@
 'use client'
 import { db } from "@/config/firebaseConfig";
 import { useAuthContextProvider } from "@/context/AuthContext";
+import { getDateDifference } from "@/lib/getDateDifference";
 import { cn } from "@/lib/utils";
 import { and, collection, onSnapshot, or, query, where } from "firebase/firestore";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 // senderId: userr.user?.uid,
 //                 receiverId: id,
@@ -33,12 +35,26 @@ const Message = ({ id } : {
             // setData(dataa)
         })        
 }, [])
+
+// const ddd = getDateDifference(timeStamp)
   return (
     <div className="overflow-y-auto relative">
         <div className="max-h-[454px] mt-[52px]">
             {messages?.map((message, key) =>(
                 <div key={key} className={`flex justify-between mb-5 ${id === message.senderId ? '' : 'flex-row-reverse'}`}>
-                  <div className={cn(`text-sm text-[#141414CC] font-normal leading-[22px] py-2.5 pr-2 px-[15px] ${id === message.senderId ? 'w-[259px] bg-[#F7F7F7] rounded-t-[12px] rounded-br-[12px]' : 'w-[315px] bg-[#FEEDE7] rounded-t-[12px] rounded-bl-[12px]'} ${key === messages.length - 1 && 'mb-5'} `)}>{message?.text} </div>
+                  <div>
+                    <Image 
+                      src={id === message.senderId ? message.senderURL : message.receiverURL}
+                      alt=""
+                      height={50}
+                      width={50}
+                      className="w-[50px] h-[50px] rounded-full"
+                    />
+                    <div className={cn(`text-sm text-[#141414CC] font-normal leading-[22px] py-2.5 pr-2 px-[15px] ${id === message.senderId ? 'w-[259px] bg-[#F7F7F7] rounded-t-[12px] rounded-br-[12px]' : 'w-[315px] bg-[#FEEDE7] rounded-t-[12px] rounded-bl-[12px]'} ${key === messages.length - 1 && 'mb-5'} `)}>
+                      {message?.text}
+                    </div>
+                    <div className="ml-auto ">{getDateDifference(message.timestamp)}</div>
+                  </div>
                     <div className="flex-shrink-0 w-[70px]"/>
                 </div>
             ))}
